@@ -10,6 +10,7 @@
 	$: memberCount = parseFloat(data.memberCount?.toPrecision(2));
 	$: contributors = parseFloat(data.roleMembers["1214817156420862012"]?.toPrecision(2));
 	$: starCount = parseFloat(data.starCount?.toPrecision(2));
+	$: gitCommits = parseFloat(data.gitCommits?.toPrecision(2));
 	let metadata = {
 		url: "https://suyu.dev",
 		title: "suyu - Open-source, non-profit Switch emulator",
@@ -116,7 +117,7 @@
 	>
 		<h1 class="text-[48px] leading-[0.9]">By the numbers</h1>
 		<HomepageCounter count={contributors} subText="dedicated contributors" />
-		<HomepageCounter count={starCount} subText="GitLab stars" />
+		<HomepageCounter count={gitCommits} subText="Git commits" />
 		<HomepageCounter count={4000} subText="supported games" />
 		<HomepageCounter count={memberCount} subText="members on Discord" />
 	</div>
