@@ -19,8 +19,7 @@
 		// Variables
 		const UA = navigator.userAgent;
 		const url = `https://git.suyu.dev/api/v1/repos/suyu/suyu/tags`;
-		const developerMode = false;
-		let timeout = 3000;
+		const fakeVersionTag = false;
 		let latestRelease = "";
 
 		// Infinite timeout to test download workflow, comment out or disable developerMode if you don't want this
@@ -59,7 +58,7 @@
 				return null;
 			}
 		}
-		if (!developerMode) {
+		if (!fakeVersionTag) {
             latestRelease = await getTag();
 		} else {
             latestRelease = "v0.0.1";
@@ -78,7 +77,7 @@
 			} else {
 				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/${latestRelease}/`;
 			}
-		}, 30000);
+		}, 3000);
 	});
 </script>
 
