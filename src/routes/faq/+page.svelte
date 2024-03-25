@@ -39,11 +39,11 @@
 	<p class="text-[15px] leading-[1.41] md:text-[19px] md:leading-[1.1]">Q: What is the purpose of Suyu?</p>
 	<p class= "text-m text-[15px]">A: The purpose of this project is to provide a free, open-source alternative to the now-dead Yuzu emulator. We believe that the community should be able to emulate their Switch device (legally) and be able to enjoy their favorite game titles.</p>
 	<p class="text-[15px] leading-[1.41] md:text-[19px] md:leading-[1.1]">Q: How can I contribute to Suyu?</p>
-	<p class= "text-m text-[15px]">A: You can contribute to this project by submitting a pull request on our <a href="https://git.suyu.dev/suyu/suyu">Git</a> page. We are always looking for new contributors to help us improve the project!</p>
+	<p class= "text-m text-[15px]">A: You can contribute to this project by submitting a pull request on our <a href="https://git.suyu.dev/suyu/suyu"><u>Git</u></a> page. We are always looking for new contributors to help us improve the project!</p>
 	<p class="text-[15px] leading-[1.41] md:text-[19px] md:leading-[1.1]">Q: Where can I download Suyu?</p>
-	<p class= "text-m text-[15px]">A: You can download the latest build of Suyu from our <a href="https://git.suyu.dev/suyu/suyu/releases">Git</a>. Please make sure you are using the right URL!</p>
+	<p class= "text-m text-[15px]">A: You can download the latest build of Suyu from our <a href="https://git.suyu.dev/suyu/suyu/releases"><u>Git</u></a>. Please make sure you are using the right URL!</p>
 	<p class="text-[15px] leading-[1.41] md:text-[19px] md:leading-[1.1]">Q: What is the current progress for Suyu?</p>
-	<p class= "text-m text-[15px]">A: As of 3/20/2024, we have released our first Windows binary 🎉! You can find it <a href="https://git.suyu.dev/suyu/suyu/releases">here</a>. We are always trying to make more and more progress, so please feel free to <a href="https://discord.gg/suyu">join the Discord!</a></p>
+	<p class= "text-m text-[15px]">A: As of 3/20/2024, we have released our first Windows binary 🎉! You can find it <a href="https://git.suyu.dev/suyu/suyu/releases"><u>here</u></a>. We are always trying to make more and more progress, so please feel free to <a href="https://discord.gg/suyu"><u>join the Discord!</u></a></p>
 	<br />
 	<div class="leading-[1.41] items-center text-[15px] md:leading-[1.1] flex gap-2 text-gray-600">Email hosting lovingly provided by
 		<a href="https://tuta.com" target="_blank">

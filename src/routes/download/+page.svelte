@@ -45,10 +45,11 @@
 				const releases = await response.json();
 				const latestRelease = releases[0].name;
 
+                console.log(latestRelease)
 				// Release found
 				if (latestRelease) {
-					console.log("Latest release tag:", latestRelease.name);
-					return latestRelease.name; // Assuming the first result is the latest
+					console.log("Latest release tag:", latestRelease);
+					return latestRelease; // Assuming the first result is the latest
 				} else {
 					console.log("No releases found.");
 					return null;
@@ -77,7 +78,7 @@
 			} else {
 				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/${latestRelease}/`;
 			}
-		}, 3000);
+		}, 30000);
 	});
 </script>
 
@@ -107,13 +108,13 @@
 		/>
 	</svg>
 
-	<h1 class="text-24px leading-1.41 md:text-60px md:leading-1.1">
+	<h1 class="text-[24px] leading-[1.41] md:text-[60px] md:leading-[1.1]">
 		{@html htmlContent}
 	</h1>
 
 	<p class="max-w-[36rem] text-lg leading-relaxed text-[#A6A5A7]">
 		Your download should start shortly. If it doesn't, click <a
-			href="https://gitlab.suyu.dev/suyu/suyu/releases">here</a
+			href="https://gitlab.suyu.dev/suyu/suyu/releases"><u>here</u></a
 		>.
 	</p>
 </div>
