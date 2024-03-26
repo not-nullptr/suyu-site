@@ -149,7 +149,7 @@
 		{
 			name: "FAQ",
 			href: "/faq",
-			title: "Coming Soon",
+			title: "Frequently Asked Questions",
 			target: "_self",
 		},
 		{
@@ -309,7 +309,7 @@
 			>
 				<a href="/coming-soon" class="px-5 py-3 transition hover:text-white" title="Coming Soon">Blog</a>
 				<a href="/coming-soon" class="px-5 py-3 transition hover:text-white" title="Coming Soon">Docs</a>
-				<a href="/faq" class="px-5 py-3 transition hover:text-white" title="Coming Soon">FAQ</a>
+				<a href="/faq" class="px-5 py-3 transition hover:text-white" title="Frequently Asked Questions">FAQ</a>
 				<a href="https://docs.google.com/spreadsheets/u/0/d/1LrLak1DP4UP3bNZKOCAzwNEp5JMkVozYuMnUBDF8gQM/htmlview#" class="px-5 py-3 transition hover:text-white" title="Compatibility" target="_blank">Compatibility</a>
 			</div>
 			<div class="flex w-full flex-row items-center justify-end text-[#A6A5A7]">
