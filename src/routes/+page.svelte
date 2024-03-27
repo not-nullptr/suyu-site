@@ -116,7 +116,8 @@
 	>
 		<h1 class="text-[48px] leading-[0.9]">By the numbers</h1>
 		<HomepageCounter count={contributors} subText="dedicated contributors" />
-		<HomepageCounter count={starCount} subText="GitLab stars" />
+		<!-- The wording "Repository stars" was voted on by the community -->
+		<HomepageCounter count={starCount} subText="Repository stars" />
 		<HomepageCounter count={4000} subText="supported games" />
 		<HomepageCounter count={memberCount} subText="members on Discord" />
 	</div>
