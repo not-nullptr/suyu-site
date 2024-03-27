@@ -106,7 +106,7 @@
 
 	<p class="max-w-[36rem] text-lg leading-relaxed text-[#A6A5A7]">
 		Your download should start shortly. If it doesn't, click <a
-			href="https://gitlab.suyu.dev/suyu/suyu/releases"><u>here</u></a
+			href="https://git.suyu.dev/suyu/suyu/releases"><u>here</u></a
 		>.
 	</p>
 </div>
