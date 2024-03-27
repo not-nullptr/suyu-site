@@ -5,12 +5,13 @@
 	// cool moving dots :3
 	// NOTE: This is required to be ran on the server due to issues with Svelte
 	let text = "Downloading Suyu";
+	const textLength = text.length
 	setInterval(() => {
 		text += ".";
-		if (text.length > 19) {
+		// Text length + 3 is essentially the length of the text above + the 3 dots
+		if (text.length > textLength + 3) {
 			text = "Downloading Suyu";
 		}
-		//console.log(text);
 	}, 500);
 
 	$: htmlContent = `${text}`;
@@ -19,7 +20,7 @@
 		// Variables
 		const UA = navigator.userAgent;
 		const url = `https://git.suyu.dev/api/v1/repos/suyu/suyu/tags`;
-		const fakeVersionTag = false;
+		const fakeVersionTag = false; // Fake version tag? (for debugging)
 		let latestRelease = "";
 
 		async function getTag() {
