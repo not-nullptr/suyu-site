@@ -22,14 +22,6 @@
 		const fakeVersionTag = false;
 		let latestRelease = "";
 
-		// Infinite timeout to test download workflow, comment out or disable developerMode if you don't want this
-        // nvm this was bugging out lmao
-		/* if (developerMode) {
-			timeout = 9999;
-			return;
-		} */
-
-        // NOTE: I have no idea if this works.. Shoutout to the very smart person who blocked ALL API requests to the git server...
 		async function getTag() {
 			try {
 				// Get the latest release tag
@@ -67,13 +59,14 @@
 
 		setTimeout(() => {
 			if (UA.includes("Windows")) {
-				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Windows_x64.7z`;
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Windows_x86_64.7z`;
+              // Android is above Linux because Android UA's also contain "Linux"
 			} else if (UA.includes("Android")) {
-				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/app-mainline-release.apk`;
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Android_Arm64.apk`;
 			} else if (UA.includes("Linux")) {
-				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/suyu-mainline--.AppImage`;
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Linux_x86_64.AppImage`;
 			} else if (UA.includes("Macintosh;")) {
-				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/suyu-macOS-arm64.dmg?inline=false`;
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-macOS-Arm64.dmg`;
 			} else {
 				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/${latestRelease}/`;
 			}
