@@ -36,7 +36,7 @@
 				const releases = await response.json();
 				const latestRelease = releases[0].name;
 
-                console.log(latestRelease)
+				console.log(latestRelease);
 				// Release found
 				if (latestRelease) {
 					console.log("Latest release tag:", latestRelease);
@@ -51,16 +51,16 @@
 			}
 		}
 		if (!fakeVersionTag) {
-            latestRelease = await getTag();
+			latestRelease = await getTag();
 		} else {
-            latestRelease = "v0.0.1";
-            console.log(latestRelease)
+			latestRelease = "v0.0.1";
+			console.log(latestRelease);
 		}
 
 		setTimeout(() => {
 			if (UA.includes("Windows")) {
 				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Windows_x86_64.7z`;
-              // Android is above Linux because Android UA's also contain "Linux"
+				// Android is above Linux because Android UA's also contain "Linux"
 			} else if (UA.includes("Android")) {
 				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Android_Arm64.apk`;
 			} else if (UA.includes("Linux")) {
