@@ -19,21 +19,15 @@ async function fetchServerSideData() {
 					},
 				})
 			: Promise.resolve({ json: () => roleMembers }),
-		GITLAB_API_TOKEN
-			? fetch("https://gitlab.com/api/v4/projects/suyu-emu%2Fsuyu/", {
-					headers: {
-						Authorization: `Bearer ${GITLAB_API_TOKEN}`,
-					},
-				})
-			: Promise.resolve({ json: () => ({ star_count: 0 }) }), // Default to 0 if no token is provided
+		fetch("https://git.suyu.dev/api/v1/repos/suyu/suyu"),
 	];
 
 	const [res, roles, gitlabRes] = await Promise.all(promises);
 	const jsonPromises = [res.json(), roles.json(), gitlabRes.json()];
-	const [resJson, rolesJson, gitlabResJson] = await Promise.all(jsonPromises);
+	const [resJson, rolesJson, gitResJson] = await Promise.all(jsonPromises);
 
 	memberCount = resJson.approximate_member_count;
-	starCount = gitlabResJson.star_count;
+	starCount = gitResJson.stars_count;
 	if (DISCORD_USER_TOKEN) roleMembers = rolesJson;
 
 	console.log("Member count:", memberCount);
