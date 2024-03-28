@@ -1,73 +1,79 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    onMount(async () => {
-        const UA = navigator.userAgent;
-        const url = `https://gitlab.com/api/v4/projects/55919530/repository/tree`;
-        async function getTag() { 
-            try {
-                const response = await fetch(url, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                });
-                // Convert to JSON
-                let files = await response.json();
-                
-                files = files.filter((f) => f.name.startsWith("v") && f.type === "tree");
-                // get the latest release using the version number
-                // thanks, copilot!!
-                const latestRelease = files.reduce((a, b) => {
-                    const aVersion = a.name.replace("v", "").split(".");
-                    const bVersion = b.name.replace("v", "").split(".");
-                    if (aVersion[0] > bVersion[0]) {
-                        return a;
-                    } else if (aVersion[0] < bVersion[0]) {
-                        return b;
-                    } else {
-                        if (aVersion[1] > bVersion[1]) {
-                            return a;
-                        } else if (aVersion[1] < bVersion[1]) {
-                            return b;
-                        } else {
-                            if (aVersion[2] > bVersion[2]) {
-                                return a;
-                            } else if (aVersion[2] < bVersion[2]) {
-                                return b;
-                            } else {
-                                return a;
-                            }
-                        }
-                    }
-                });
+	// Allow for us to use client-sided code when needed
+	import { onMount } from "svelte";
 
-                // Release found
-                if (latestRelease) {
-                    console.log("Latest release tag:", latestRelease.name);
-                    return latestRelease.name; // Assuming the first result is the latest
-                } else {
-                    console.log("No releases found.");
-                    return null;
-                }
-            } catch (error) {
-                console.error("Error fetching latest release tag:", error);
-                return null;
-            }
-        }
-        const latestRelease = await getTag();
-        setTimeout(() => {
-            if (UA.includes("Windows")) {
-                window.location.href = `https://gitlab.com/suyu-emu/suyu-releases/-/raw/master/${latestRelease}/Suyu-Windows_x64.7z`;
-            } else if (UA.includes("Linux")) {
-                window.location.href = `https://gitlab.com/suyu-emu/suyu-releases/-/raw/master/${latestRelease}/suyu-mainline--.AppImage`;
-            } else if (UA.includes("Macintosh;")) {
-                window.location.href = `https://gitlab.com/suyu-emu/suyu-releases/-/raw/master/${latestRelease}/suyu-macOS-arm64.dmg?inline=false`;
-            } else {
-                window.location.href = `https://gitlab.com/suyu-emu/suyu-releases/-/blob/master/${latestRelease}/`;
-            }
-        }, 3000);
-    })
+	// cool moving dots :3
+	// NOTE: This is required to be ran on the server due to issues with Svelte
+	let text = "Downloading Suyu";
+	const textLength = text.length
+	setInterval(() => {
+		text += ".";
+		// Text length + 3 is essentially the length of the text above + the 3 dots
+		if (text.length > textLength + 3) {
+			text = "Downloading Suyu";
+		}
+	}, 500);
+
+	$: htmlContent = `${text}`;
+
+	onMount(async () => {
+		// Variables
+		const UA = navigator.userAgent;
+		const url = `https://git.suyu.dev/api/v1/repos/suyu/suyu/tags`;
+		const fakeVersionTag = false; // Fake version tag? (for debugging)
+		let latestRelease = "";
+
+		async function getTag() {
+			try {
+				// Get the latest release tag
+				const response = await fetch(url, {
+					headers: {
+						"Content-Type": "application/json",
+					},
+				});
+
+				// Sort the response & get the first release (usually the latest)
+				/* TODO: Make the process way cleaner */
+				const releases = await response.json();
+				const latestRelease = releases[0].name;
+
+				console.log(latestRelease);
+				// Release found
+				if (latestRelease) {
+					console.log("Latest release tag:", latestRelease);
+					return latestRelease; // Assuming the first result is the latest
+				} else {
+					console.log("No releases found.");
+					return null;
+				}
+			} catch (error) {
+				console.error("Error fetching latest release tag:", error);
+				return null;
+			}
+		}
+		if (!fakeVersionTag) {
+			latestRelease = await getTag();
+		} else {
+			latestRelease = "v0.0.1";
+			console.log(latestRelease);
+		}
+
+		setTimeout(() => {
+			if (UA.includes("Windows")) {
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Windows_x86_64.7z`;
+				// Android is above Linux because Android UA's also contain "Linux"
+			} else if (UA.includes("Android")) {
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Android_Arm64.apk`;
+			} else if (UA.includes("Linux")) {
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-Linux_x86_64.AppImage`;
+			} else if (UA.includes("Macintosh;")) {
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/download/${latestRelease}/Suyu-macOS-Arm64.dmg`;
+			} else {
+				window.location.href = `https://git.suyu.dev/suyu/suyu/releases/${latestRelease}/`;
+			}
+		}, 3000);
+	});
 </script>
-
 
 <svelte:head>
 	<title>Downloading Suyu</title>
@@ -94,36 +100,14 @@
 			stroke="white"
 		/>
 	</svg>
-    <script>
-        onMount(() => {
-            let text = "Downloading Suyu";
-            let interval = setInterval(() => {
-                text += ".";
-                if (text.length > 16) {
-                    text = "Downloading Suyu";
-                }
-                $text = text;
-            }, 500);
-            $: clearInterval(interval);
-        });
-    </script>
-    <!-- TODO: Have the 3 dots loop (e.g . -> .. -> ...) -->
-     <h1 class="text-[24px] leading-[1.41] md:text-[60px] md:leading-[1.1]">
-        Downloading Suyu...
-    </h1>
-    <!-- <h1 class="text-[24px] leading-[1.41] md:text-[60px] md:leading-[1.1]">
-        {#if $text}
-            {$text}
-        {:else}
-            Downloading Suyu
-        {/if}
-    </h1> -->
 
-
+	<h1 class="text-[24px] leading-[1.41] md:text-[60px] md:leading-[1.1]">
+		{@html htmlContent}
+	</h1>
 
 	<p class="max-w-[36rem] text-lg leading-relaxed text-[#A6A5A7]">
 		Your download should start shortly. If it doesn't, click <a
-			href="https://gitlab.suyu.dev/suyu/suyu/releases">here</a
+			href="https://git.suyu.dev/suyu/suyu/releases"><u>here</u></a
 		>.
 	</p>
 </div>
