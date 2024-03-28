@@ -35,7 +35,7 @@
 		// },
 	];
 
-	function navClick(e: MouseEvent | HTMLAnchorElement) {
+	function navClick(e: MouseEvent | HTMLAnchorElement, ignoreAnimation = false) {
 		const navBars = document.querySelectorAll<HTMLDivElement>(".navbar");
 		if (navBars.length !== 1)
 			navBars.forEach((bar) => {
@@ -52,6 +52,7 @@
 		const bounds = target.getBoundingClientRect();
 		const navBounds = navBar.getBoundingClientRect();
 		const pillBounds = indicator.getBoundingClientRect();
+		if (ignoreAnimation) return;
 		indicator.style.transform = `translateX(${bounds.left - navBounds.left}px)`;
 		indicator.style.width = `${bounds.width}px`;
 		if (
@@ -190,7 +191,7 @@
 			<a
 				href={item.href}
 				data-index={i}
-				on:click={navClick}
+				on:click={(e) => navClick(e, true)}
 				class={`navitem flex flex-grow basis-[0] items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold ${
 					selected === i ? " text-[#a9a9a9] opacity-100" : "opacity-50"
 				}`}

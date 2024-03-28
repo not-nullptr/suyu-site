@@ -1,6 +1,6 @@
 import { userRepo } from "$lib/server/repo";
 import type { SuyuUser } from "$lib/server/schema";
-import { PUBLIC_KEY } from "$lib/server/secrets/secrets.json";
+import { PUB_KEY } from "$env/static/private";
 import type { IJwtData } from "$types/auth";
 import cookie from "cookie";
 import jwt from "jsonwebtoken";
@@ -18,7 +18,7 @@ export async function useAuth(
 	}
 	if (apiKey.startsWith("Bearer ")) {
 		const token = apiKey.replace("Bearer ", "");
-		const decoded: IJwtData = jwt.verify(token, Buffer.from(PUBLIC_KEY), {
+		const decoded: IJwtData = jwt.verify(token, Buffer.from(PUB_KEY), {
 			algorithms: ["RS256"],
 		}) as IJwtData;
 		let user = await userRepo.findOne({

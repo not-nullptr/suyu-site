@@ -8,8 +8,9 @@
 
 	export let data: PageData;
 	$: memberCount = parseFloat(data.memberCount?.toPrecision(2));
-	$: contributors = parseFloat(data.roleMembers["1214817156420862012"]?.toPrecision(2));
+	$: contributors = parseFloat(data.roleMembers?.["1214817156420862012"]?.toPrecision(2));
 	$: starCount = parseFloat(data.starCount?.toPrecision(2));
+	$: gitCommits = parseFloat(data.gitCommits?.toPrecision(2));
 	let metadata = {
 		url: "https://suyu.dev",
 		title: "suyu - Open-source, non-profit Switch emulator",
@@ -70,12 +71,8 @@
 		and open-source, forever.
 	</p>
 	<div class="flex flex-col gap-4 md:flex-row">
-		<a
-			href="/download"
-			rel="noreferrer noopener"
-			class="cta-button"
-		>
-				Download <svg
+		<a href="/download" rel="noreferrer noopener" class="cta-button">
+			Download <svg
 				width="16"
 				height="16"
 				viewBox="0 0 16 16"
@@ -116,8 +113,7 @@
 	>
 		<h1 class="text-[48px] leading-[0.9]">By the numbers</h1>
 		<HomepageCounter count={contributors} subText="dedicated contributors" />
-		<!-- The wording "Repository stars" was voted on by the community -->
-		<HomepageCounter count={starCount} subText="Repository stars" />
+		<HomepageCounter count={gitCommits} subText="Git commits" />
 		<HomepageCounter count={4000} subText="supported games" />
 		<HomepageCounter count={memberCount} subText="members on Discord" />
 	</div>
@@ -187,8 +183,8 @@
 	>
 		<h2 class="text-[24px] leading-[1.41] md:text-[60px] md:leading-[1.1]">Git</h2>
 		<p class="mt-2 text-lg leading-relaxed">
-			Our Git instance is where all the magic of suyu happens. We're always looking for new contributors
-			to help us out, so feel free to check out our code.
+			Our Git instance is where all the magic of suyu happens. We're always looking for new
+			contributors to help us out, so feel free to check out our code.
 		</p>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

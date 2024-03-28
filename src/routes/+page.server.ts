@@ -6,6 +6,7 @@ let starCount = 0;
 let roleMembers = {
 	"1214817156420862012": 50,
 };
+let gitCommits = 0;
 
 async function fetchServerSideData() {
 	console.log("Fetching member count");
@@ -22,16 +23,17 @@ async function fetchServerSideData() {
 		fetch("https://git.suyu.dev/api/v1/repos/suyu/suyu"),
 	];
 
-	const [res, roles, gitlabRes] = await Promise.all(promises);
+	const [res, roles, gitlabRes, suyuGitRes] = await Promise.all(promises);
 	const jsonPromises = [res.json(), roles.json(), gitlabRes.json()];
 	const [resJson, rolesJson, gitResJson] = await Promise.all(jsonPromises);
 
+	
 	memberCount = resJson.approximate_member_count;
-	starCount = gitResJson.stars_count;
+	gitCommits = parseInt(suyuGitRes?.headers?.get('x-total'), 10) || 0;
 	if (DISCORD_USER_TOKEN) roleMembers = rolesJson;
 
 	console.log("Member count:", memberCount);
-	console.log("Stars count:", starCount);
+	console.log('Git commit count', gitCommits);
 }
 
 if (!building) {
@@ -46,5 +48,6 @@ export async function load({ cookies }) {
 		memberCount,
 		starCount,
 		roleMembers,
+		gitCommits
 	};
 }
