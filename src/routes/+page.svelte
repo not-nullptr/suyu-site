@@ -9,7 +9,6 @@
 	export let data: PageData;
 	$: memberCount = parseFloat(data.memberCount?.toPrecision(2));
 	$: contributors = parseFloat(data.roleMembers?.["1214817156420862012"]?.toPrecision(2));
-	$: starCount = parseFloat(data.starCount?.toPrecision(2));
 	$: gitCommits = parseFloat(data.gitCommits?.toPrecision(2));
 	let metadata = {
 		url: "https://suyu.dev",
