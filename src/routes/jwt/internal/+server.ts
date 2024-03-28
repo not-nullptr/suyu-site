@@ -1,4 +1,4 @@
-import { PRIVATE_KEY } from "$lib/server/secrets/secrets.json";
+import { PRIVATE_KEY } from "$env/static/private";
 import { useAuth } from "$lib/util/api/index.js";
 import jwt from "jsonwebtoken";
 

@@ -1,7 +1,6 @@
 import { Room, RoomManager } from "$lib/server/class/Room";
 import { userRepo } from "$lib/server/repo/index.js";
 import { SuyuUser } from "$lib/server/schema";
-import { PUBLIC_KEY } from "$lib/server/secrets/secrets.json";
 import { json } from "$lib/server/util";
 import { useAuth } from "$lib/util/api/index.js";
 import type { IJwtData } from "$types/auth.js";
@@ -65,12 +64,5 @@ export async function POST({ request, getClientAddress }) {
 		host: user,
 		hasPassword: body.hasPassword || false,
 	});
-	console.log("Room added:", JSON.stringify(room, null, 2));
-	// push every room to the top which starts with `[SUYU OFFICIAL]` and was created with username "suyu"
-	const suyuRoom = RoomManager.rooms.find((r) => r.roomInfo.name.startsWith("[SUYU OFFICIAL]"));
-	if (suyuRoom && suyuRoom.host.username === "suyu") {
-		RoomManager.rooms.splice(RoomManager.rooms.indexOf(suyuRoom), 1);
-		RoomManager.rooms.unshift(suyuRoom);
-	}
 	return json(room.toJSON());
 }
